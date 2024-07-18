@@ -2,10 +2,10 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="bg-blue-950 py-8">
+        <footer className="bg-blue-950 py-5">
             <div className="container mx-auto max-w-7xl px-1">
                 <div className="flex flex-wrap justify-center">
-                    <div className="w-full lg:w-1/3 text-center lg:text-left lg:mb-0">
+                    <div className="w-full lg:w-1/3 text-center lg:text-left  p-10 ">
                         <a href="/" className="inline-block mb-2">
                             <img className="w-26 h-28 mx-auto lg:mx-0" alt="logo" src="/logo.png" />
                         </a>
@@ -39,7 +39,7 @@ const Footer = () => {
                             </a>
                         </div>
                     </div>
-                    <div className="w-full lg:w-1/3 mb-6 lg:mb-0">
+                    <div className="w-full lg:w-1/3 mb-6 lg:mb-0 p-10">
                         <h4 className="text-white text-center lg:text-left mb-2 text-1xl font-bold">Quick Links</h4>
                         <ul className="list-none text-center lg:text-left space-y-2">
                             <li><a href="/" className="text-white hover:text-orange-500">Home</a></li>
@@ -52,7 +52,7 @@ const Footer = () => {
                             
                         </ul>
                     </div>
-                    <div className="w-full lg:w-1/3 mb-6 lg:mb-0">
+                    <div className="w-full lg:w-1/3 mb-6 lg:mb-0 p-10">
                         <h4 className="text-white text-center lg:text-left mb-2 text-1xl font-bold">Contact</h4>
                         <div className="text-center lg:text-left">
                             <a href="mailto:registrar@nitjsr.ac.in" className="text-white flex items-center justify-center lg:justify-start mb-2">

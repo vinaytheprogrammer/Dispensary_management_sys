@@ -6,7 +6,7 @@ const Header = () => {
     const { isAuthenticated, user, logout } = useAuth();
 
     return (
-        <header className="w-full bg-white p-6  top-0 z-50">
+        <header className="w-full bg-white p-8  top-0 z-50">
             <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
                 <div className="flex justify-center w-full md:w-auto">
                     <Link to="/">

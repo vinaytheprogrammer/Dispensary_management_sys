@@ -18,8 +18,8 @@ const Admin = () => {
             {/* Sidebar */}
             <aside className="w-64 bg-gray-100 shadow-lg overflow-y-auto">
                 <div className="p-4">
-                    <h2 className="text-xl font-bold mb-4">Admin Panel</h2>
-                    <ul>
+                    <h2 className="text-xl font-bold mb-4 text-[#274187]">Admin Panel</h2>
+                    <ul className='font-semibold'>
                         <li className="mb-2">
                             <Link to="add-new-admin" className="block py-2 px-4 rounded-lg hover:bg-gray-200">
                                 Add New Admin

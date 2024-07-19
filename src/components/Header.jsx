@@ -23,7 +23,7 @@ const Header = () => {
                     <h1 className="text-[#274187] text-2xl md:text-3xl font-bold mt-2">National Institute of Technology Jamshedpur</h1>
                 </div>
                 <nav className="ml-auto">
-                    <ul className="flex gap-6 list-none m-0 p-0">
+                    <ul className="flex gap-6 list-none m-0 p-0 text-[#274187]">
                         <li><Link to="/" className="hover:underline text-xl font-semibold">Home</Link></li>
                         {isAuthenticated ? (
                             <>

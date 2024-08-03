@@ -1,3 +1,4 @@
+// src/pages/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -26,9 +27,16 @@ const Login = () => {
         } else {
             // Perform authentication here
             // Assuming authentication is successful
-            // const userData = { userType, userId };
-            // login(userData);
-            navigate('/admin');
+            const userData = { userType, userId, name: 'User Name', email: 'user@example.com' }; // Example user data
+            login(userData);
+
+            if (userType === 'admin') {
+                navigate('/admin');
+            } else if (userType === 'doctor') {
+                navigate('/doctor');
+            } else if (userType === 'staff') {
+                navigate('/staff');
+            }
         }
     };
 

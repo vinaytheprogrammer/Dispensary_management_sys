@@ -6,16 +6,30 @@ const Login = () => {
     const [userType, setUserType] = useState('');
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
+    const [forgotPassword, setForgotPassword] = useState(false);
+    const [otp, setOtp] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Perform authentication here
-        // Assuming authentication is successful
-        // const userData = { userType, userId }; 
-        // login(userData);
-        navigate('/admin');
+        if (forgotPassword) {
+            // Handle password reset logic here
+            console.log({ userType, userId, otp, newPassword, confirmNewPassword });
+            setForgotPassword(false); // Reset forgot password state after successful reset
+            setPassword(''); // Clear password field
+            setOtp('');
+            setNewPassword('');
+            setConfirmNewPassword('');
+        } else {
+            // Perform authentication here
+            // Assuming authentication is successful
+            // const userData = { userType, userId };
+            // login(userData);
+            navigate('/admin');
+        }
     };
 
     return (
@@ -46,7 +60,7 @@ const Login = () => {
                         className="w-full p-2 border border-gray-300 rounded"
                     />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 relative">
                     <label htmlFor="password" className="block text-lg mb-2">Password:</label>
                     <input
                         type="password"
@@ -55,13 +69,64 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         className="w-full p-2 border border-gray-300 rounded"
                     />
+                    {!forgotPassword && (
+                        <button
+                            type="button"
+                            onClick={() => setForgotPassword(true)}
+                            className="text-sm text-blue-900 absolute right-0 bottom-0 mr-2 mb-1"
+                        >
+                            Forgot Password
+                        </button>
+                    )}
                 </div>
-                <button
-                    type="submit"
-                    className="w-full bg-blue-900 text-white p-2 rounded"
-                >
-                    Login
-                </button>
+                {forgotPassword && (
+                    <>
+                        <div className="mb-4">
+                            <label htmlFor="otp" className="block text-lg mb-2">OTP:</label>
+                            <input
+                                type="text"
+                                id="otp"
+                                value={otp}
+                                onChange={(e) => setOtp(e.target.value)}
+                                className="w-full p-2 border border-gray-300 rounded"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="newPassword" className="block text-lg mb-2">New Password:</label>
+                            <input
+                                type="password"
+                                id="newPassword"
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                                className="w-full p-2 border border-gray-300 rounded"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="confirmNewPassword" className="block text-lg mb-2">Confirm New Password:</label>
+                            <input
+                                type="password"
+                                id="confirmNewPassword"
+                                value={confirmNewPassword}
+                                onChange={(e) => setConfirmNewPassword(e.target.value)}
+                                className="w-full p-2 border border-gray-300 rounded"
+                            />
+                        </div>
+                        <button
+                            type="submit"
+                            className="w-full bg-blue-900 text-white p-2 rounded"
+                        >
+                            Reset Password
+                        </button>
+                    </>
+                )}
+                {!forgotPassword && (
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-900 text-white p-2 rounded"
+                    >
+                        Login
+                    </button>
+                )}
             </form>
         </main>
     );

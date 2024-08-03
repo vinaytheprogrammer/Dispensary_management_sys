@@ -12,6 +12,7 @@ import Inventory from './Inventory';
 import PatientConsultationForm from './PatientConsultationForm';
 import ViewPrescriptionForm from './ViewPrescriptionForm';
 import ChangePassword from './ChangePassword';
+import ConsultedAppointments from './ConsultedAppointments';
 const Admin = () => {
     return (
         <div className="flex h-screen overflow-hidden">
@@ -48,6 +49,11 @@ const Admin = () => {
                         <li className="mb-2">
                             <Link to="doc-appointments" className="block py-2 px-4 rounded-lg hover:bg-gray-200">
                                 Doctor Appointments
+                            </Link>
+                        </li>
+                        <li className="mb-2">
+                            <Link to="consulted-appointments" className="block py-2 px-4 rounded-lg hover:bg-gray-200">
+                                Consulted Appointments
                             </Link>
                         </li>
                         <li className="mb-2">
@@ -90,6 +96,7 @@ const Admin = () => {
                     
                     <Route path="add-staff-doctor" element={<AddStaffDoctor />} />
                     <Route path="doc-appointments" element={<DocAppointments />} />
+                    <Route path="consulted-appointments" element={<ConsultedAppointments />} />
                     <Route path="deduct-medicine" element={<DeductMedicine />} />
                     <Route path="patient-consultation-form" element={<PatientConsultationForm />} />
                     <Route path="change-password" element={<ChangePassword />} />

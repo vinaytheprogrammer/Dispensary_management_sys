@@ -42,6 +42,10 @@ const ViewPrescriptionForm = ({ userRole }) => {
     const handlePrint = () => {
         window.print();
     };
+    const handleCloseClick = () => {
+        
+        navigate('/admin/consulted-appointments');
+    };
 
     return (
         <main className="p-8">
@@ -101,7 +105,7 @@ const ViewPrescriptionForm = ({ userRole }) => {
                 {medicineStatus.includes('outOfStock') && (
                     <button type="button" onClick={handlePrint} className="bg-blue-900 text-white px-4 py-2 rounded">Print Prescription</button>
                 )}
-                <button type="button" onClick={() => navigate('/admin/all-appointments')} className="bg-blue-900 text-white px-4 py-2 rounded">Close</button>
+                <button type="button" onClick={handleCloseClick} className="bg-blue-900 text-white px-4 py-2 rounded">Close</button>
             </form>
         </main>
     );

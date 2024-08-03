@@ -6,7 +6,7 @@ const Header = () => {
     const { isAuthenticated, user, logout } = useAuth();
 
     return (
-        <header className="w-full bg-white p-8  top-0 z-50">
+        <header className="w-full bg-white p-8 top-0 z-50">
             <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
                 <div className="flex justify-center w-full md:w-auto">
                     <Link to="/">
@@ -16,7 +16,6 @@ const Header = () => {
                             className="max-h-25 ml"
                         />
                     </Link>
-                    
                 </div>
                 <div className="flex flex-col items-center w-full ml:auto text-center my-4 md:my-0 custom-margin-md">
                     <h2 className="text-[#274187] text-2xl md:text-3xl font-bold leading-none">राष्ट्रीय प्रौद्योगिकी संस्थान जमशेदपुर</h2>

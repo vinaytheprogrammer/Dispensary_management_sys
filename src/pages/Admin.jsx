@@ -6,12 +6,12 @@ import RemoveAdminStaffDoctor from './RemoveAdminStaffDoctor';
 import AddMedicine from './AddMedicine';
 import DeductMedicine from './DeductMedicine';
 import NewAppointment from './NewAppointment';
-import AllAppointments from './AllAppointments';
+import DocAppointments from './DocAppointments';
 import ViewPatientRecord from './ViewPatientRecord';
 import Inventory from './Inventory';
 import PatientConsultationForm from './PatientConsultationForm';
 import ViewPrescriptionForm from './ViewPrescriptionForm';
-
+import ChangePassword from './ChangePassword';
 const Admin = () => {
     return (
         <div className="flex h-screen overflow-hidden">
@@ -46,8 +46,8 @@ const Admin = () => {
                             </Link>
                         </li>
                         <li className="mb-2">
-                            <Link to="all-appointments" className="block py-2 px-4 rounded-lg hover:bg-gray-200">
-                                All Appointments
+                            <Link to="doc-appointments" className="block py-2 px-4 rounded-lg hover:bg-gray-200">
+                                Doctor Appointments
                             </Link>
                         </li>
                         <li className="mb-2">
@@ -63,6 +63,11 @@ const Admin = () => {
                         <li className="mb-2">
                             <Link to="deduct-medicine" className="block py-2 px-4 rounded-lg hover:bg-gray-200">
                                 Deduct Medicine from Inventory
+                            </Link>
+                        </li>
+                        <li className="mb-2">
+                            <Link to="change-password" className="block py-2 px-4 rounded-lg hover:bg-gray-200">
+                                Change Password
                             </Link>
                         </li>
                     </ul>
@@ -84,9 +89,10 @@ const Admin = () => {
                     <Route path="view-prescription-form" element={<ViewPrescriptionForm />} />
                     
                     <Route path="add-staff-doctor" element={<AddStaffDoctor />} />
-                    <Route path="all-appointments" element={<AllAppointments />} />
+                    <Route path="doc-appointments" element={<DocAppointments />} />
                     <Route path="deduct-medicine" element={<DeductMedicine />} />
                     <Route path="patient-consultation-form" element={<PatientConsultationForm />} />
+                    <Route path="change-password" element={<ChangePassword />} />
                 </Routes>
             </section>
         </div>

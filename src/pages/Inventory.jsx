@@ -1,4 +1,3 @@
-// src/pages/Inventory.jsx
 import React, { useState, useEffect } from 'react';
 
 const Inventory = () => {
@@ -25,19 +24,34 @@ const Inventory = () => {
 
     return (
         <main className="p-8">
-            <h2 className="text-3xl mb-4 text-center">Available Medicines</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {medicines.map((medicine, index) => (
-                    <div key={index} className="border border-gray-300 p-4 rounded">
-                        <h3 className="text-xl mb-2">{medicine.medicineName}</h3>
-                        <p><strong>Batch No.:</strong> {medicine.batchNo}</p>
-                        <p><strong>Mfg Date:</strong> {medicine.mfgDate}</p>
-                        <p><strong>Expiry Date:</strong> {medicine.expiryDate}</p>
-                        <p><strong>Quantity:</strong> {medicine.quantity}</p>
-                        <p><strong>Description:</strong> {medicine.description}</p>
-                        <p><strong>Supplier:</strong> {medicine.supplier}</p>
-                    </div>
-                ))}
+            <h2 className="text-3xl mb-4 text-center font-semibold">Available Medicines</h2>
+            <div className="overflow-x-auto">
+                <table className="min-w-full bg-white border border-gray-300">
+                    <thead>
+                        <tr>
+                            <th className="px-4 py-2 border-b">Medicine Name</th>
+                            <th className="px-4 py-2 border-b">Batch No.</th>
+                            <th className="px-4 py-2 border-b">Mfg Date</th>
+                            <th className="px-4 py-2 border-b">Expiry Date</th>
+                            <th className="px-4 py-2 border-b">Quantity</th>
+                            <th className="px-4 py-2 border-b">Description</th>
+                            <th className="px-4 py-2 border-b">Supplier</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {medicines.map((medicine, index) => (
+                            <tr key={index}>
+                                <td className="px-4 py-2 border-b">{medicine.medicineName}</td>
+                                <td className="px-4 py-2 border-b">{medicine.batchNo}</td>
+                                <td className="px-4 py-2 border-b">{medicine.mfgDate}</td>
+                                <td className="px-4 py-2 border-b">{medicine.expiryDate}</td>
+                                <td className="px-4 py-2 border-b">{medicine.quantity}</td>
+                                <td className="px-4 py-2 border-b">{medicine.description}</td>
+                                <td className="px-4 py-2 border-b">{medicine.supplier}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </main>
     );

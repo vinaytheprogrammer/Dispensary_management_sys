@@ -4,13 +4,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const ViewPrescriptionForm = ({ userRole }) => {
     const navigate = useNavigate();
     const { state } = useLocation();
-    const { userID, name, dob, gender, contactNo, height, weight, bodyTemperature, bloodPressure, bloodGroup, spo2, reasonForVisit, symptoms, clinicalFindings, advice, prescription = [], remarks } = state || {};
+    const { userID, name, gender, reasonForVisit, prescription = [] } = state || {};
 
     const [formData, setFormData] = useState({
-        symptoms: symptoms || '',
-        clinicalFindings: clinicalFindings || '',
-        advice: advice || '',
-        remarks: remarks || '',
+        symptoms: state?.symptoms || '',
+        clinicalFindings: state?.clinicalFindings || '',
+        advice: state?.advice || '',
+        remarks: state?.remarks || '',
     });
 
     const [medicineQueue, setMedicineQueue] = useState(prescription);
@@ -53,48 +53,50 @@ const ViewPrescriptionForm = ({ userRole }) => {
                     {userRole !== 'staff' && (
                         <>
                             <p><strong>Name:</strong> {name}</p>
-                            {/* <p><strong>Date of Birth:</strong> {dob}</p> */}
                             <p><strong>Gender:</strong> {gender}</p>
-                            {/* <p><strong>Contact No:</strong> {contactNo}</p>
-                            <p><strong>Height:</strong> {height}</p>
-                            <p><strong>Weight:</strong> {weight}</p>
-                            <p><strong>Body Temperature:</strong> {bodyTemperature}</p>
-                            <p><strong>Blood Pressure:</strong> {bloodPressure}</p>
-                            <p><strong>Blood Group:</strong> {bloodGroup}</p>
-                            <p><strong>SPO2:</strong> {spo2}</p> */}
                             <p><strong>Reason for Visit:</strong> {reasonForVisit}</p>
                         </>
                     )}
                 </div>
-                {/* <div>
-                    <label className="block text-lg">Symptoms:</label>
-                    <textarea name="symptoms" value={formData.symptoms} readOnly={userRole === 'staff'} onChange={handleFormChange} className="w-full p-2 border border-gray-300 rounded"></textarea>
-                </div> */}
                 <div>
-                    <label className="block text-lg">Clinical Findings:</label>
-                    <textarea name="clinicalFindings" value={formData.clinicalFindings} readOnly={userRole === 'staff'} onChange={handleFormChange} className="w-full p-2 border border-gray-300 rounded"></textarea>
-                </div>
-                <div>
-                    <label className="block text-lg">Advice:</label>
-                    <textarea name="advice" value={formData.advice} readOnly={userRole === 'staff'} onChange={handleFormChange} className="w-full p-2 border border-gray-300 rounded"></textarea>
-                </div>
-                <div>
-                    <h3 className="text-xl font-bold">Prescription</h3>
-                    {medicineQueue.map((medicine, index) => (
-                        <div key={index} className="flex space-x-2 border border-gray-300 p-2 rounded mt-2">
-                            <p><strong>Name:</strong> {medicine.name}</p>
-                            <p><strong>Dosage:</strong> {medicine.dosage}</p>
-                            <p><strong>Timings:</strong> {medicine.timings}</p>
-                            <p><strong>Days:</strong> {medicine.days}</p>
-                            <p><strong>Remarks:</strong> {medicine.remarks}</p>
-                            {userRole === 'staff' && (
-                                <select value={medicineStatus[index]} onChange={(e) => handleStatusChange(index, e.target.value)} className="p-2 border border-gray-300 rounded">
-                                    <option value="provided">Provided</option>
-                                    <option value="outOfStock">Out of Stock</option>
-                                </select>
-                            )}
-                        </div>
-                    ))}
+                    <h3 className="text-xl font-bold">Medicines</h3>
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full bg-white border border-gray-300">
+                            <thead>
+                                <tr>
+                                    <th className="px-4 py-2 border-b">Name</th>
+                                    <th className="px-4 py-2 border-b">Dosage</th>
+                                    <th className="px-4 py-2 border-b">Timings</th>
+                                    <th className="px-4 py-2 border-b">Days</th>
+                                    <th className="px-4 py-2 border-b">Remarks</th>
+                                    {userRole === 'staff' && <th className="px-4 py-2 border-b">Status</th>}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {medicineQueue.map((medicine, index) => (
+                                    <tr key={index}>
+                                        <td className="px-4 py-2 border-b">{medicine.name}</td>
+                                        <td className="px-4 py-2 border-b">{medicine.dosage}</td>
+                                        <td className="px-4 py-2 border-b">{medicine.timings}</td>
+                                        <td className="px-4 py-2 border-b">{medicine.days}</td>
+                                        <td className="px-4 py-2 border-b">{medicine.remarks}</td>
+                                        {userRole === 'staff' && (
+                                            <td className="px-4 py-2 border-b">
+                                                <select
+                                                    value={medicineStatus[index]}
+                                                    onChange={(e) => handleStatusChange(index, e.target.value)}
+                                                    className="p-2 border border-gray-300 rounded"
+                                                >
+                                                    <option value="provided">Provided</option>
+                                                    <option value="outOfStock">Out of Stock</option>
+                                                </select>
+                                            </td>
+                                        )}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 {medicineStatus.includes('outOfStock') && (
                     <button type="button" onClick={handlePrint} className="bg-blue-900 text-white px-4 py-2 rounded">Print Prescription</button>

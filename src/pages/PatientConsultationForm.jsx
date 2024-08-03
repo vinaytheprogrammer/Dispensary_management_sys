@@ -7,7 +7,6 @@ const PatientConsultationForm = () => {
     const { userID, name, dob, gender, contactNo, height, weight, bodyTemperature, bloodPressure, bloodGroup, spo2, reasonForVisit, ...form } = state || {};
 
     const [formData, setFormData] = useState({
-        symptoms: '',
         clinicalFindings: '',
         advice: '',
         remarks: '',
@@ -24,9 +23,8 @@ const PatientConsultationForm = () => {
 
     useEffect(() => {
         if (state) {
-            const { symptoms, clinicalFindings, advice, remarks } = state;
+            const { clinicalFindings, advice, remarks } = state;
             setFormData({
-                symptoms: symptoms || '',
                 clinicalFindings: clinicalFindings || '',
                 advice: advice || '',
                 remarks: remarks || '',
@@ -64,7 +62,6 @@ const PatientConsultationForm = () => {
                 },
                 body: JSON.stringify({ 
                     status: 'consulted',
-                    symptoms: formData.symptoms,
                     clinicalFindings: formData.clinicalFindings,
                     advice: formData.advice,
                     remarks: formData.remarks,
@@ -72,7 +69,7 @@ const PatientConsultationForm = () => {
                 }),
             });
             if (response.ok) {
-                navigate('/admin/all-appointments');
+                navigate('/admin/doc-appointments');
             } else {
                 console.error('Failed to update appointment status');
             }
@@ -83,25 +80,23 @@ const PatientConsultationForm = () => {
 
     return (
         <main className="p-8">
-            <h2 className="text-3xl mb-4 text-center">Patient Consultation Form</h2>
+            <h2 className="text-3xl mb-4 text-center font-semibold">Patient Consultation Form</h2>
             <form className="space-y-4">
                 <div className="mb-4">
                     <h3 className="text-xl font-bold">Patient Details</h3>
-                    <p><strong>Name:</strong> {name}</p>
-                    <p><strong>Date of Birth:</strong> {dob}</p>
-                    <p><strong>Gender:</strong> {gender}</p>
-                    <p><strong>Contact No:</strong> {contactNo}</p>
-                    <p><strong>Height:</strong> {height}</p>
-                    <p><strong>Weight:</strong> {weight}</p>
-                    <p><strong>Body Temperature:</strong> {bodyTemperature}</p>
-                    <p><strong>Blood Pressure:</strong> {bloodPressure}</p>
-                    <p><strong>Blood Group:</strong> {bloodGroup}</p>
-                    <p><strong>SPO2:</strong> {spo2}</p>
-                    <p><strong>Reason for Visit:</strong> {reasonForVisit}</p>
-                </div>
-                <div>
-                    <label className="block text-lg">Symptoms:</label>
-                    <input type="text" name="symptoms" value={formData.symptoms} onChange={handleFormChange} className="w-full p-2 border border-gray-300 rounded" />
+                    <div className="grid grid-cols-2 gap-4">
+                        <div><strong>Name:</strong> {name}</div>
+                        <div><strong>Date of Birth:</strong> {dob}</div>
+                        <div><strong>Gender:</strong> {gender}</div>
+                        <div><strong>Contact No:</strong> {contactNo}</div>
+                        <div><strong>Height:</strong> {height}</div>
+                        <div><strong>Weight:</strong> {weight}</div>
+                        <div><strong>Body Temperature:</strong> {bodyTemperature}</div>
+                        <div><strong>Blood Pressure:</strong> {bloodPressure}</div>
+                        <div><strong>Blood Group:</strong> {bloodGroup}</div>
+                        <div><strong>SPO2:</strong> {spo2}</div>
+                        <div><strong>Reason for Visit:</strong> {reasonForVisit}</div>
+                    </div>
                 </div>
                 <div>
                     <label className="block text-lg">Clinical Findings:</label>
@@ -144,15 +139,30 @@ const PatientConsultationForm = () => {
                     <button type="button" onClick={addMedicineToQueue} className="mt-2 bg-blue-900 text-white px-4 py-2 rounded">Queue</button>
                     <div className="mt-4">
                         <h4 className="text-lg font-bold">Medicines Queue</h4>
-                        {medicineQueue.map((medicine, index) => (
-                            <div key={index} className="flex space-x-2 border border-gray-300 p-2 rounded mt-2">
-                                <p><strong>Name:</strong> {medicine.name}</p>
-                                <p><strong>Dosage:</strong> {medicine.dosage}</p>
-                                <p><strong>Timings:</strong> {medicine.timings}</p>
-                                <p><strong>Days:</strong> {medicine.days}</p>
-                                <p><strong>Remarks:</strong> {medicine.remarks}</p>
-                            </div>
-                        ))}
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full bg-white border border-gray-300">
+                                <thead>
+                                    <tr>
+                                        <th className="px-4 py-2 border-b">Name</th>
+                                        <th className="px-4 py-2 border-b">Dosage</th>
+                                        <th className="px-4 py-2 border-b">Timings</th>
+                                        <th className="px-4 py-2 border-b">Days</th>
+                                        <th className="px-4 py-2 border-b">Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {medicineQueue.map((medicine, index) => (
+                                        <tr key={index}>
+                                            <td className="px-4 py-2 border-b">{medicine.name}</td>
+                                            <td className="px-4 py-2 border-b">{medicine.dosage}</td>
+                                            <td className="px-4 py-2 border-b">{medicine.timings}</td>
+                                            <td className="px-4 py-2 border-b">{medicine.days}</td>
+                                            <td className="px-4 py-2 border-b">{medicine.remarks}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <button type="button" onClick={handleSendToStaff} className="bg-blue-900 text-white px-4 py-2 rounded">Send to Staff</button>

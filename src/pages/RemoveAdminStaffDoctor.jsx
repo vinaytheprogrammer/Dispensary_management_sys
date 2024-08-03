@@ -23,8 +23,8 @@ const RemoveAdminStaffDoctor = () => {
 
     return (
         <main className="p-8">
-            <h2 className="text-3xl mb-4 text-center">Remove Admin/Staff/Doctor</h2>
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+            <h2 className="text-3xl mb-4 text-center font-semibold">Remove Admin/Staff/Doctor</h2>
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto font-medium">
                 <div className="mb-4">
                     <label htmlFor="userId" className="block text-lg mb-2">User ID:</label>
                     <input type="text" id="userId" name="userId" value={formData.userId} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded" required />

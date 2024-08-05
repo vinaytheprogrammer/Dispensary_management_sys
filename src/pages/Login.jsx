@@ -51,6 +51,7 @@ const Login = () => {
                         value={userType}
                         onChange={(e) => setUserType(e.target.value)}
                         className="w-full p-2 border border-gray-300 rounded"
+                        required
                     >
                         <option value="">Select User Type</option>
                         <option value="admin">Admin</option>

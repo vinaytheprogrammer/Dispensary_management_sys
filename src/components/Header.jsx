@@ -1,10 +1,17 @@
 // src/components/Header.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React  from 'react';
+import { Link, useNavigate  } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+
 
 const Header = () => {
     const { isAuthenticated, user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
 
     return (
         <header className="w-full bg-white p-8 top-0 z-50">
@@ -37,7 +44,8 @@ const Header = () => {
                                             <span className="block font-medium">{user.name}</span>
                                             <span className="block text-sm text-gray-500">{user.email}</span>
                                         </div>
-                                        <button onClick={logout} className="block w-full text-left px-4 py-2 hover:bg-gray-200">Logout</button>
+                                        
+                                        <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-gray-200">Logout</button>
                                     </div>
                                 </li>
                             </>

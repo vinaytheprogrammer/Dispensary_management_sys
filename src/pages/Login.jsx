@@ -1,3 +1,4 @@
+// src/pages/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -18,28 +19,27 @@ const Login = () => {
         if (forgotPassword) {
             // Handle password reset logic here
             console.log({ userType, userId, otp, newPassword, confirmNewPassword });
-            setForgotPassword(false); // Reset forgot password state after successful reset
-            setPassword(''); // Clear password field
+            // Reset states
+            setForgotPassword(false);
+            setPassword('');
             setOtp('');
             setNewPassword('');
             setConfirmNewPassword('');
         } else {
-            // Perform authentication here
+            // Perform authentication
             try {
                 const response = await fetch('http://localhost:3000/auth/login', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ user_id: userId, password, user_type: userType })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId, password, user_type: userType }),
                 });
 
                 const data = await response.json();
 
                 if (data.success) {
-                    const userData = { userType: data.userType, userId, token: data.token }; // Example user data
+                    const userData = { userType: data.userType, userId, token: data.token };
                     login(userData);
-
+                    
                     if (data.userType === 'admin') {
                         navigate('/admin');
                     } else if (data.userType === 'doctor') {
@@ -138,19 +138,13 @@ const Login = () => {
                                 className="w-full p-2 border border-gray-300 rounded"
                             />
                         </div>
-                        <button
-                            type="submit"
-                            className="w-full bg-blue-900 text-white p-2 rounded"
-                        >
+                        <button type="submit" className="w-full bg-blue-900 text-white p-2 rounded">
                             Reset Password
                         </button>
                     </>
                 )}
                 {!forgotPassword && (
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-900 text-white p-2 rounded"
-                    >
+                    <button type="submit" className="w-full bg-blue-900 text-white p-2 rounded">
                         Login
                     </button>
                 )}

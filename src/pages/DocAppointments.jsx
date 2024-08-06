@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const DocAppointments = () => {
     const [appointments, setAppointments] = useState([
-        // Sample data, replace with actual data fetching
-        { userId: 'S123', name: 'John Doe', relation: 'self', status: 'to be consulted' },
-        { userId: 'E456', name: 'Jane Smith', relation: 'self', status: 'consulted' },
-        { userId: 'E789', name: 'Bob Johnson', relation: 'dependant', status: 'to be consulted' },
+        { userId: 'S123', name: 'John Doe', relation: 'self', status: 'to be consulted', form: {} },
+        { userId: 'E456', name: 'Jane Smith', relation: 'self', status: 'consulted', form: {} },
+        { userId: 'E789', name: 'Bob Johnson', relation: 'dependant', status: 'to be consulted', form: {} },
     ]);
     const [filter, setFilter] = useState('all');
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     const handleFilterChange = (e) => {
         setFilter(e.target.value);
     };
 
     const handleProceedClick = (appointment) => {
+        const rolePath = user.userType === 'doctor' ? '/doctor' : '/admin';
         if (appointment.status === 'consulted') {
-            navigate('/admin/view-prescription-form', { state: { form: appointment.form } });
+            navigate(`${rolePath}/view-prescription-form`, { state: { form: appointment.form, userRole: user.userType } });
         } else {
-            navigate('/admin/patient-consultation-form', { state: appointment });
+            navigate(`${rolePath}/consulted-appointments`, { state: appointment });
         }
     };
 

@@ -6,6 +6,8 @@ import NewAppointment from './NewAppointment';
 import DocAppointments from './DocAppointments';
 import Inventory from './Inventory';
 import ChangePassword from './ChangePassword';
+import ViewPrescriptionForm from './ViewPrescriptionForm';
+import ConsultedAppointments from './ConsultedAppointments';
 
 const Doctor = () => {
     return (
@@ -52,6 +54,8 @@ const Doctor = () => {
                     <Route path="doc-appointments" element={<DocAppointments />} />
                     <Route path="inventory" element={<Inventory />} />
                     <Route path="change-password" element={<ChangePassword />} />
+                    <Route path="consulted-appointments" element={<ConsultedAppointments />} />
+                    <Route path="view-prescription-form" element={<ViewPrescriptionForm />} />
                 </Routes>
             </section>
         </div>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const ViewPrescriptionForm = ({ userRole }) => {
+const ViewPrescriptionForm = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
-    const { userID, name, gender, reasonForVisit, prescription = [] } = state || {};
+    const { userID, name, gender, reasonForVisit, prescription = [], userRole } = state || {};
 
     const [formData, setFormData] = useState({
         symptoms: state?.symptoms || '',
@@ -42,9 +42,10 @@ const ViewPrescriptionForm = ({ userRole }) => {
     const handlePrint = () => {
         window.print();
     };
+
     const handleCloseClick = () => {
-        
-        navigate('/admin/consulted-appointments');
+        const rolePath = userRole === 'staff' ? '/staff/consulted-appointments' : userRole === 'doctor' ? '/doctor/consulted-appointments' : '/admin/consulted-appointments';
+        navigate(rolePath);
     };
 
     return (

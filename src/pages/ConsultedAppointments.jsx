@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const ConsultedAppointments = () => {
     const [appointments, setAppointments] = useState([
-        // Sample data, replace with actual data fetching
-        { userId: 'S123', name: 'John Doe', relation: 'self', status: 'consulted', form: { /* prescription form data */ } },
-        { userId: 'E456', name: 'Jane Smith', relation: 'self', status: 'consulted', form: { /* prescription form data */ } },
+        { userId: 'S123', name: 'John Doe', relation: 'self', status: 'consulted', form: {} },
+        { userId: 'E456', name: 'Jane Smith', relation: 'self', status: 'consulted', form: {} },
     ]);
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     const handleViewPrescriptionClick = (appointment) => {
-        navigate('/admin/view-prescription-form', { state: { form: appointment.form } });
+        const rolePath = user.userType === 'doctor' ? '/doctor/view-prescription-form' : user.userType === 'staff' ? '/staff/view-prescription-form' : '/admin/view-prescription-form';
+        navigate(rolePath, { state: { form: appointment.form, userRole: user.userType } });
     };
 
     return (

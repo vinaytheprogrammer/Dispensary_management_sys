@@ -8,8 +8,12 @@ import Doctor from "./pages/Doctor";
 import Staff from "./pages/Staff";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { useAuth } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
+  const { user } = useAuth();
+
   return (
     <div className="flex flex-col min-h-screen">
       <Router>
@@ -18,10 +22,21 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/admin/*" element={<Admin />} />
-            <Route path="/doctor/*" element={<Doctor />} />
-            <Route path="/staff/*" element={<Staff />} />
-            
+            <Route path="/admin/*" element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <Admin />
+              </ProtectedRoute>
+            } />
+            <Route path="/doctor/*" element={
+              <ProtectedRoute allowedRoles={['doctor']}>
+                <Doctor />
+              </ProtectedRoute>
+            } />
+            <Route path="/staff/*" element={
+              <ProtectedRoute allowedRoles={['staff']}>
+                <Staff />
+              </ProtectedRoute>
+            } />
           </Routes>
         </main>
         <Footer />

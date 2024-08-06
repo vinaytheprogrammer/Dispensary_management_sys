@@ -7,6 +7,7 @@ import Inventory from './Inventory';
 import AddMedicine from './AddMedicine';
 import DeductMedicine from './DeductMedicine';
 import ChangePassword from './ChangePassword';
+import ViewPrescriptionForm from './ViewPrescriptionForm';
 
 const Staff = () => {
     return (
@@ -59,6 +60,7 @@ const Staff = () => {
                     <Route path="add-medicine" element={<AddMedicine />} />
                     <Route path="deduct-medicine" element={<DeductMedicine />} />
                     <Route path="change-password" element={<ChangePassword />} />
+                    <Route path="view-prescription-form" element={<ViewPrescriptionForm />} />
                 </Routes>
             </section>
         </div>

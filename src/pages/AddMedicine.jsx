@@ -9,6 +9,7 @@ const AddMedicine = () => {
     b_quantity: "",
     remark: "",
     brand_name: "",
+    medicineType: "", // Added state for medicine type
   });
 
   const handleChange = (e) => {
@@ -29,6 +30,7 @@ const AddMedicine = () => {
       b_quantity: Number(formData.b_quantity), // Ensure this is a number
       Remarks: formData.remark,
       brand_name: formData.brand_name,
+      medicineType: formData.medicineType, // Added medicine type to data
     };
 
     axios
@@ -44,6 +46,7 @@ const AddMedicine = () => {
           b_quantity: "",
           remark: "",
           brand_name: "",
+          medicineType: "",
         });
       })
       .catch((error) => {
@@ -114,6 +117,26 @@ const AddMedicine = () => {
               className="w-full p-2 border border-gray-300 rounded"
               required
             />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="medicineType" className="block text-lg mb-2">
+              Medicine Type:
+            </label>
+            <select
+              id="medicineType"
+              name="medicineType"
+              value={formData.medicineType}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            >
+              <option value="">Select Medicine Type</option>
+              <option value="tablet">Tablet</option>
+              <option value="capsule">Capsule</option>
+              <option value="syrup">Syrup</option>
+              <option value="injection">Injection</option>
+              <option value="ointment">Ointment</option>
+            </select>
           </div>
           <div className="mb-4">
             <label htmlFor="remark" className="block text-lg mb-2">

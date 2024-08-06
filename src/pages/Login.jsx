@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -14,7 +13,7 @@ const Login = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (forgotPassword) {
             // Handle password reset logic here
@@ -26,16 +25,35 @@ const Login = () => {
             setConfirmNewPassword('');
         } else {
             // Perform authentication here
-            // Assuming authentication is successful
-            const userData = { userType, userId, name: 'User Name', email: 'user@example.com' }; // Example user data
-            login(userData);
+            try {
+                const response = await fetch('http://localhost:3000/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ user_id: userId, password, user_type: userType })
+                });
 
-            if (userType === 'admin') {
-                navigate('/admin');
-            } else if (userType === 'doctor') {
-                navigate('/doctor');
-            } else if (userType === 'staff') {
-                navigate('/staff');
+                const data = await response.json();
+
+                if (data.success) {
+                    const userData = { userType: data.userType, userId, token: data.token }; // Example user data
+                    login(userData);
+
+                    if (data.userType === 'admin') {
+                        navigate('/admin');
+                    } else if (data.userType === 'doctor') {
+                        navigate('/doctor');
+                    } else if (data.userType === 'staff') {
+                        navigate('/staff');
+                    }
+                } else {
+                    console.log('Login failed:', data.message);
+                    // Optionally, display a message to the user
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                // Optionally, display a message to the user
             }
         }
     };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Inventory = () => {
     const [medicines, setMedicines] = useState([]);
+    const [showInventory, setShowInventory] = useState(false);
 
     useEffect(() => {
         // Simulated fetch data from an API endpoint
@@ -25,34 +26,42 @@ const Inventory = () => {
     return (
         <main className="p-8 ">
             <h2 className="text-3xl mb-4 text-center font-semibold">Available Medicines</h2>
-            <div className="overflow-x-auto">
-                <table className="min-w-full bg-white border border-gray-300">
-                    <thead>
-                        <tr>
-                            <th className="px-4 py-2 border-b">Medicine Name</th>
-                            <th className="px-4 py-2 border-b">Batch No.</th>
-                            <th className="px-4 py-2 border-b">Mfg Date</th>
-                            <th className="px-4 py-2 border-b">Expiry Date</th>
-                            <th className="px-4 py-2 border-b">Quantity</th>
-                            <th className="px-4 py-2 border-b">Description</th>
-                            <th className="px-4 py-2 border-b">Supplier</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {medicines.map((medicine, index) => (
-                            <tr key={index}>
-                                <td className="px-4 py-2 border-b">{medicine.medicineName}</td>
-                                <td className="px-4 py-2 border-b">{medicine.batchNo}</td>
-                                <td className="px-4 py-2 border-b">{medicine.mfgDate}</td>
-                                <td className="px-4 py-2 border-b">{medicine.expiryDate}</td>
-                                <td className="px-4 py-2 border-b">{medicine.quantity}</td>
-                                <td className="px-4 py-2 border-b">{medicine.description}</td>
-                                <td className="px-4 py-2 border-b">{medicine.supplier}</td>
+            <button
+                onClick={() => setShowInventory(!showInventory)}
+                className="bg-blue-900 text-white p-2 rounded mb-4"
+            >
+                {showInventory ? 'Hide Inventory' : 'Show Inventory'}
+            </button>
+            {showInventory && (
+                <div className="overflow-x-auto">
+                    <table className="min-w-full bg-white border border-gray-300">
+                        <thead>
+                            <tr>
+                                <th className="px-4 py-2 border-b">Medicine Name</th>
+                                <th className="px-4 py-2 border-b">Batch No.</th>
+                                <th className="px-4 py-2 border-b">Medicine Type</th>
+                                <th className="px-4 py-2 border-b">Expiry Date</th>
+                                <th className="px-4 py-2 border-b">Quantity</th>
+                                <th className="px-4 py-2 border-b">Description</th>
+                                <th className="px-4 py-2 border-b">Supplier</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {medicines.map((medicine, index) => (
+                                <tr key={index}>
+                                    <td className="px-4 py-2 border-b">{medicine.medicineName}</td>
+                                    <td className="px-4 py-2 border-b">{medicine.batchNo}</td>
+                                    <td className="px-4 py-2 border-b">{medicine.medicineType}</td>
+                                    <td className="px-4 py-2 border-b">{medicine.expiryDate}</td>
+                                    <td className="px-4 py-2 border-b">{medicine.quantity}</td>
+                                    <td className="px-4 py-2 border-b">{medicine.description}</td>
+                                    <td className="px-4 py-2 border-b">{medicine.supplier}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </main>
     );
 };

@@ -45,7 +45,7 @@ const ViewPatientRecord = () => {
     };
 
     return (
-        <main className="p-8 font-medium">
+        <main className="p-8 font-medium mx-auto max-w-5xl">
             <h2 className="text-3xl mb-4 text-center font-semibold">View Patient Records</h2>
             <div className="mb-4">
                 <label htmlFor="userType" className="block text-lg mb-2">Select User Type:</label>

@@ -29,7 +29,7 @@ const AddStaffDoctor = () => {
     return (
         <main className="p-8">
             <h2 className="text-3xl mb-4 text-center font-semibold">Add New Doctor/Staff</h2>
-            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto font-medium">
+            <form onSubmit={handleSubmit} className="max-w-5xl mx-auto font-medium">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="mb-4">
                         <label htmlFor="role" className="block text-lg mb-2">Role:</label>

@@ -16,7 +16,7 @@ const ConsultedAppointments = () => {
     };
 
     return (
-        <main className="p-8 font-medium">
+        <main className="p-8 font-medium mx-auto max-w-5xl">
             <h2 className="text-3xl mb-4 text-center font-semibold">Consulted Appointments</h2>
             {appointments.length > 0 ? (
                 <div className="overflow-x-auto">

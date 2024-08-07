@@ -26,7 +26,7 @@ const DeductMedicine = () => {
       <h2 className="text-3xl mb-4 text-center font-semibold">
         Deduct Medicine from Inventory
       </h2>
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+      <form onSubmit={handleSubmit} className="mx-auto max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="mb-4">
             <label htmlFor="medicineName" className="block text-lg mb-2">

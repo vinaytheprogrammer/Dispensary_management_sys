@@ -39,7 +39,7 @@ const AddNewAdmin = () => {
     return (
         <main className="p-8">
             <h2 className="text-3xl mb-4 text-center font-semibold">Add New Admin</h2>
-            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+            <form onSubmit={handleSubmit} className="max-w-5xl mx-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-medium">
                     <div className="mb-4">
                         <label htmlFor="name" className="block text-lg mb-2">Name:</label>

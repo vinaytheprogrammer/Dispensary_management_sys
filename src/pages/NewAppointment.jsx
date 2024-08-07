@@ -150,9 +150,9 @@ const NewAppointment = () => {
     };
 
     return (
-        <main className="p-8 font-medium">
+        <main className="p-8 font-medium ">
             <h2 className="text-3xl mb-4 text-center font-semibold">New Appointment</h2>
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="mx-auto max-w-5xl">
                 <div className="mb-4">
                     <label htmlFor="appointmentType" className="block text-lg mb-2">Appointment Type:</label>
                     <select id="appointmentType" value={appointmentType} onChange={handleTypeChange} className="w-full p-2 border border-gray-300 rounded">

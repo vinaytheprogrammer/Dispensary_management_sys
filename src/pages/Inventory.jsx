@@ -23,7 +23,7 @@ const Inventory = () => {
     }, []);
 
     return (
-        <main className="p-8">
+        <main className="p-8 ">
             <h2 className="text-3xl mb-4 text-center font-semibold">Available Medicines</h2>
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white border border-gray-300">

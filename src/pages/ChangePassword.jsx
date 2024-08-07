@@ -36,7 +36,7 @@ const ChangePassword = () => {
     return (
         <main className="p-8 font-medium">
             <h2 className="text-3xl mb-4 text-center font-semibold">Change Password</h2>
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="mx-auto max-w-5xl">
                 {/* <div className="mb-4">
                     <label htmlFor="userId" className="block text-lg mb-2">User ID:</label>
                     <input type="text" id="userId" name="userId" value={formData.userId} onChange={handleInputChange} className="w-full p-2 border border-gray-300 rounded" required />

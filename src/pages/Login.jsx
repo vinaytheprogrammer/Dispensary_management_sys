@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -13,6 +12,16 @@ const Login = () => {
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const { login } = useAuth();
     const navigate = useNavigate();
+
+    const handleUserTypeChange = (e) => {
+        const selectedUserType = e.target.value;
+        setUserType(selectedUserType);
+
+        // Disable forgot password for admin users
+        if (selectedUserType === 'admin') {
+            setForgotPassword(false);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,6 +40,7 @@ const Login = () => {
                 const response = await fetch('http://localhost:3000/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
                     body: JSON.stringify({ user_id: userId, password, user_type: userType }),
                 });
 
@@ -39,7 +49,7 @@ const Login = () => {
                 if (data.success) {
                     const userData = { userType: data.userType, userId, token: data.token };
                     login(userData);
-                    
+
                     if (data.userType === 'admin') {
                         navigate('/admin');
                     } else if (data.userType === 'doctor') {
@@ -67,7 +77,7 @@ const Login = () => {
                     <select
                         id="userType"
                         value={userType}
-                        onChange={(e) => setUserType(e.target.value)}
+                        onChange={handleUserTypeChange}  /* Use the new handleUserTypeChange function */
                         className="w-full p-2 border border-gray-300 rounded"
                         required
                     >
@@ -96,7 +106,7 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         className="w-full p-2 border border-gray-300 rounded"
                     />
-                    {!forgotPassword && (
+                    {userType !== 'admin' && !forgotPassword && (  /* Disable Forgot Password for Admins */
                         <button
                             type="button"
                             onClick={() => setForgotPassword(true)}
@@ -106,7 +116,7 @@ const Login = () => {
                         </button>
                     )}
                 </div>
-                {forgotPassword && (
+                {forgotPassword && userType !== 'admin' && (  /* Show only for non-admin users */
                     <>
                         <div className="mb-4">
                             <label htmlFor="otp" className="block text-lg mb-2">OTP:</label>

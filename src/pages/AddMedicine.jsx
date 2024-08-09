@@ -23,14 +23,15 @@ const AddMedicine = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Use Axios to send a POST request
+    console.log(formData)
     const data = {
       M_name: formData.M_name,
       batch_no: formData.batch_no,
       expiry: formData.expiry,
       b_quantity: Number(formData.b_quantity), // Ensure this is a number
-      Remarks: formData.remark,
+      Remarks: formData.Remarks,
       brand_name: formData.brand_name,
-      medicineType: formData.medicineType, // Added medicine type to data
+      type: formData.type, // Added medicine type to data
     };
 
     axios
@@ -44,9 +45,9 @@ const AddMedicine = () => {
           batch_no: "",
           expiry: "",
           b_quantity: "",
-          remark: "",
+          Remarks: "",
           brand_name: "",
-          medicineType: "",
+          type: "",
         });
       })
       .catch((error) => {
@@ -119,13 +120,13 @@ const AddMedicine = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="medicineType" className="block text-lg mb-2">
+            <label htmlFor="type" className="block text-lg mb-2">
               Medicine Type:
             </label>
             <select
-              id="medicineType"
-              name="medicineType"
-              value={formData.medicineType}
+              id="type"
+              name="type"
+              value={formData.type}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
               required
@@ -139,13 +140,13 @@ const AddMedicine = () => {
             </select>
           </div>
           <div className="mb-4">
-            <label htmlFor="remark" className="block text-lg mb-2">
+            <label htmlFor="Remarks" className="block text-lg mb-2">
               Description:
             </label>
             <textarea
-              id="remark"
-              name="remark"
-              value={formData.remark}
+              id="Remarks"
+              name="Remarks"
+              value={formData.Remarks}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
             ></textarea>
